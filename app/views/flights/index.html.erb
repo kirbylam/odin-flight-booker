@@ -17,10 +17,17 @@
   <% if @availible_flights.empty? %>
     <p>No flights found matching those options!</p>
   <% else %>
-    <ul>
-      <% @availible_flights.each do |flight| %>
-      <% end %>
-    </ul>
+    <%= form_with model: @booking, url: new_bookings_path, method: :get do |form| %>
+      <ul>
+        <% @availible_flights.each do |flight| %>
+          <li>
+            <%= form.label :booking, "Date: #{flight.start_datetime.strftime("%m/%d/%Y")} Time: #{flight.start_datetime.strftime("%I:%M%p")} Duration: #{flight.flight_duration} minutes" %>
+            <%= form.radio_button :booking, flight %>
+          </li>
+        <% end %>
+      </ul>
+      <%= form.submit 'Select' %>
+    <% end %>
   <% end %>
 <% end %>
-      
+
