@@ -19,12 +19,6 @@
   <% else %>
     <ul>
       <% @availible_flights.each do |flight| %>
-        <li>
-          <ul>
-            <li><%= flight.start_datetime %></li>
-            <li><%= flight.flight_duration %></li>
-          </ul>
-        </li>
       <% end %>
     </ul>
   <% end %>
