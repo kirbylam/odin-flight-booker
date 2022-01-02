@@ -7,6 +7,7 @@ class FlightsController < ApplicationController
     if searched?
       @date = Date.strptime(params[:date], "%m/%d/%Y")
       @availible_flights = Flight.where(departure_airport: params[:departure], arrival_airport: params[:arrival], start_datetime: @date.beginning_of_day..@date.end_of_day)
+      @tickets = params[:passengers]
     end
   end
 

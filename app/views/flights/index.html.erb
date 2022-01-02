@@ -22,7 +22,7 @@
         <% @availible_flights.each do |flight| %>
           <li>
             <%= form.label :booking, "Date: #{flight.start_datetime.strftime("%m/%d/%Y")} Time: #{flight.start_datetime.strftime("%I:%M%p")} Duration: #{flight.flight_duration} minutes" %>
-            <%= form.radio_button :booking, flight %>
+            <%= form.radio_button :booking, [flight: flight, tickets: @tickets] %>
           </li>
         <% end %>
       </ul>
