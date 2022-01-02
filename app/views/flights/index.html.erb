@@ -1,0 +1,32 @@
+<h1>Search for Flights</h1>
+
+<%= form_with model: @flight, method: :get do |form| %>
+  <%= form.label :departure, 'Departure Airport' %><br>
+  <%= form.select(:departure, @airport_options) %><br>
+  <%= form.label :arrival, 'Arrival Airport' %><br>
+  <%= form.select(:arrival, @airport_options) %><br>
+  <%= form.label :passengers, 'Number of Passengers' %><br>
+  <%= form.select(:passengers, [1, 2, 3, 4]) %><br>
+  <%= form.label :date, 'Date of Departure' %><br>
+  <%= form.select(:date, @date_options.uniq) %><br><br>
+  <%= form.submit 'Search' %>
+<% end %>
+
+<% unless @availible_flights.nil? %>
+  <h1>Availible Flights</h1>
+  <% if @availible_flights.empty? %>
+    <p>No flights found matching those options!</p>
+  <% else %>
+    <ul>
+      <% @availible_flights.each do |flight| %>
+        <li>
+          <ul>
+            <li><%= flight.start_datetime %></li>
+            <li><%= flight.flight_duration %></li>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+      
