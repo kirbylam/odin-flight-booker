@@ -1,3 +1,15 @@
 <h1>New Booking</h1>
 
-
+<%= form_for @booking do |form| %>
+  <%= form.fields_for :passengers do |addy_form| %>
+    <div>
+      <%= addy_form.label :name %>
+      <%= addy_form.text_field :name %>
+      <%= addy_form.label :email %>
+      <%= addy_form.text_field :email %>
+    </div>
+  <% end %>
+  <%= form.hidden_field :flight_id, :value => @flight %>
+  <%= form.hidden_field :seats, :value => @tickets %>
+  <%= form.submit %>
+<% end %> 
