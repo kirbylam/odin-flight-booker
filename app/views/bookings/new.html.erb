@@ -1,5 +1,11 @@
 <h1>New Booking</h1>
 
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+
 <%= form_for @booking do |form| %>
   <%= form.fields_for :passengers do |addy_form| %>
     <div>

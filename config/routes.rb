@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   root 'flights#index'
 
   resource :flights, only: [:index]
-  resources :bookings, only: [:new, :create]
+  resources :bookings, only: [:show, :new, :create]
 end

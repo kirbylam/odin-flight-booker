@@ -1,6 +1,9 @@
 class BookingsController < ApplicationController
+  def show
+    @booking = Booking.find(params[:id])
+  end
+  
   def new
-    puts 'new'
     @booking = Booking.new
     @flight = params[:booking].to_i
     @tickets = params[:tickets].to_i
@@ -10,25 +13,16 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     if @booking.save
-      puts "saved"
+      redirect_to @booking
     else
-      puts "error"
-      render :new
+      flash[:warning] = 'Error! Invalid input! Please double check to see if you entered each field correctly!'
+      params = {:booking => booking_params[:flight_id], :tickets => booking_params[:seats]}
+      redirect_to new_booking_path(params)
     end
   end
 
   private
     def booking_params
       params.require(:booking).permit(:flight_id, :seats, passengers_attributes: [:name, :email])
-    end
-
-    def passengers_valid?
-      params[:booking][:seats].to_i.times do |i|
-        @passenger = Passenger.new(name: params[:booking][:passengers_attributes]["#{i}"][:name], email: params[:booking][:passengers_attributes]["#{i}"][:email])
-        unless @passenger.valid?
-          flash[:warning] = 'You entered an invalid entry!'
-          render :new
-        end
-      end
     end
 end
