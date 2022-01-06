@@ -13,6 +13,9 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     if @booking.save
+      @booking.passengers.each do |passenger|
+        PassengerMailer.with(passenger: passenger, url: @booking).confirmation_email.deliver_later
+      end
       redirect_to @booking
     else
       flash[:warning] = 'Error! Invalid input! Please double check to see if you entered each field correctly!'

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Confirmation of booking a flight for <%= @passenger.name %></h1>
+    <p>
+      You have successfully booked a flight.<br>
+    </p>
+    <p>
+    For more information, follow this link: <%= link_to 'booking_information', @url %>.<br>
+    </p>
+    <p>
+      Thank you for booking at our site!
+    </p>
+  </body>
+</html>
